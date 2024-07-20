@@ -69,6 +69,22 @@
                         inset -5px -5px 10px #ffef92;
             min-height: 50px;
         }
+        .popup {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff8c00;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .popup.show {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -81,6 +97,7 @@
         <button onclick="clearAll()">CLEAR</button>
         <div id="output"></div>
     </div>
+    <div id="popup" class="popup"></div>
 
     <script>
         const brailleMap = {
@@ -92,6 +109,15 @@
             'z': '⠵', ' ': '⠀'
         };
 
+        function showPopup(message) {
+            const popup = document.getElementById('popup');
+            popup.textContent = message;
+            popup.classList.add('show');
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 2000);
+        }
+
         function translateToBraille() {
             const input = document.getElementById('input').value.toLowerCase();
             let output = '';
@@ -99,6 +125,7 @@
                 output += brailleMap[char] || char;
             }
             document.getElementById('output').textContent = output;
+            showPopup('Text translated to Braille!');
         }
 
         function copyOutput() {
@@ -109,12 +136,13 @@
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-            alert('Output copied to clipboard!');
+            showPopup('Braille text copied to clipboard!');
         }
 
         function clearAll() {
             document.getElementById('input').value = '';
             document.getElementById('output').textContent = '';
+            showPopup('Input and output cleared!');
         }
     </script>
 </body>
