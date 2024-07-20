@@ -1,8 +1,3 @@
-Certainly! I'll center the buttons within the neumorphic container. Here's the updated version with centered buttons:
-
-
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,39 +162,3 @@ Certainly! I'll center the buttons within the neumorphic container. Here's the u
     </script>
 </body>
 </html>
-
-```
-
-Here are the changes I've made to center the buttons:
-
-1. Added a new `button-container` div:
-   ```html
-   <div class="button-container">
-       <button onclick="copyOutput()">COPY</button>
-       <button onclick="clearAll()">CLEAR</button>
-   </div>
-   ```
-
-2. Added CSS for the `button-container`:
-   ```css
-   .button-container {
-       display: flex;
-       justify-content: center;
-       gap: 20px;
-       margin-bottom: 20px;
-   }
-   ```
-
-3. Adjusted the button styles:
-   - Removed the `margin` property from the `button` selector, as it's now handled by the `gap` in the `button-container`.
-
-4. Added `text-align: center;` to the `.neumorphic` class to ensure all content within is centered.
-
-These changes center the buttons horizontally within the neumorphic container, creating a more balanced and visually appealing layout. The buttons are now evenly spaced and aligned with the center of the container.
-
-The functionality of the page remains the same:
-- The input area automatically translates English text to Braille as you type.
-- The "COPY" button copies the Braille output to the clipboard.
-- The "CLEAR" button resets both the input and output areas.
-
-The neumorphic design, color scheme, and overall layout of the page remain unchanged. Is there anything else you'd like to modify or add to this English to Braille translator?
