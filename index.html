@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENG TO BRAILLE</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔠</text></svg>">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #ffd07f;
+            color: #8b4513;
+        }
+        h1 {
+            color: #ff8c00;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .neumorphic {
+            background: #ffd07f;
+            border-radius: 50px;
+            box-shadow:  20px 20px 60px #d9b16c,
+                        -20px -20px 60px #ffef92;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        textarea {
+            width: calc(100% - 40px);
+            height: 100px;
+            margin-bottom: 20px;
+            background: #ffe0a3;
+            border: none;
+            border-radius: 25px;
+            padding: 20px;
+            color: #8b4513;
+            font-size: 16px;
+            box-shadow: inset 5px 5px 10px #d9b16c,
+                        inset -5px -5px 10px #ffef92;
+        }
+        button {
+            background: #ffd07f;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            color: #8b4513;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow:  5px 5px 10px #d9b16c,
+                        -5px -5px 10px #ffef92;
+            margin: 0 10px 20px 10px;
+        }
+        button:hover {
+            box-shadow: inset 5px 5px 10px #d9b16c,
+                        inset -5px -5px 10px #ffef92;
+        }
+        #output {
+            font-size: 24px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            padding: 20px;
+            background: #ffe0a3;
+            border-radius: 25px;
+            box-shadow: inset 5px 5px 10px #d9b16c,
+                        inset -5px -5px 10px #ffef92;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="neumorphic">
+        <h1>⠑⠝⠛⠇⠊⠎⠓ ⠞⠕ ⠃⠗⠁⠊⠇⠇⠑ ⠞⠗⠁⠝⠎⠇⠁⠞⠕⠗</h1>
+        <textarea id="input" placeholder="Enter English text here"></textarea>
+        <br>
+        <button onclick="translateToBraille()">TRANSLATE</button>
+        <button onclick="copyOutput()">COPY</button>
+        <button onclick="clearAll()">CLEAR</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        const brailleMap = {
+            'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑',
+            'f': '⠋', 'g': '⠛', 'h': '⠓', 'i': '⠊', 'j': '⠚',
+            'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝', 'o': '⠕',
+            'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞',
+            'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽',
+            'z': '⠵', ' ': '⠀'
+        };
+
+        function translateToBraille() {
+            const input = document.getElementById('input').value.toLowerCase();
+            let output = '';
+            for (let char of input) {
+                output += brailleMap[char] || char;
+            }
+            document.getElementById('output').textContent = output;
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            const textarea = document.createElement('textarea');
+            textarea.value = output.textContent;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Output copied to clipboard!');
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').textContent = '';
+        }
+    </script>
+</body>
+</html>
